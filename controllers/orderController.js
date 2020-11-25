@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 
 exports.getOrders = async (req, res) => {
     try {
-        const { date } = req.body;
+        const { date } = req.query;
         console.log(date)
         const formatDate = date.split("-").join(",")
 
