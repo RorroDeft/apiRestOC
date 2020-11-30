@@ -30,6 +30,10 @@ exports.createOrder = async (req, res) => {
     const { ocnumber, enviroment } = req.body;
     const existOrder = await Order.findOne({ ocnumber });
     req.body.enviroment = enviroment.toUpperCase();
+
+    if(ocnumber.trim().length<18){
+        return res.status(500).send('Incorrect Format, min 18 characters');
+    }
     if (existOrder) {
         return res.status(500).send('The order already exist in BD ');
     }
@@ -50,7 +54,7 @@ exports.createOrder = async (req, res) => {
 
 exports.changeStateOrder = async (req, res) => {
     try {
-        const { ocnumber } = req.body
+        const { ocnumber } = req.query
         let order = await Order.findOne({ ocnumber }).where("avaible").equals(true)
 
         if (!order) {
