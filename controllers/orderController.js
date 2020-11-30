@@ -54,14 +54,14 @@ exports.changeStateOrder = async (req, res) => {
         let order = await Order.findOne({ ocnumber }).where("avaible").equals(true)
 
         if (!order) {
-            throw new Error('Sorry, order not found');
+            return res.status(500).send('Sorry, order not found');
         }
         req.body.avaible = false
         order = await Order.findOneAndUpdate({ ocnumber: ocnumber }, req.body, { new: true });
         res.json({ order })
     } catch (error) {
         console.log(error);
-        res.status(500).send("hubo un error")
+        res.status(500).send("error")
     }
 
 }
