@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 
 exports.getOrders = async (req, res) => {
     try {
-        const { date,enviroment} = req.query;
+        const { date,enviroment,avaible} = req.query;
         console.log(date)
         const formatDate = date.split("-").join(",")
 
@@ -15,10 +15,10 @@ exports.getOrders = async (req, res) => {
             } ,
             enviroment:(enviroment.toUpperCase())
         })
-        .where("avaible").equals(true)
+       // .where("avaible").equals(true)
         .sort({ dateRegistry: 'desc' })
        // .select("ocnumber enviroment")
-       .select("ocnumber")
+       .select("ocnumber enviroment")
         res.json({ order });
     } catch (error) {
         console.log(error);
