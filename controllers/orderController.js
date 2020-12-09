@@ -18,7 +18,7 @@ exports.getOrders = async (req, res) => {
        // .where("avaible").equals(true)
         .sort({ dateRegistry: 'desc' })
        // .select("ocnumber enviroment")
-       .select("ocnumber enviroment")
+       .select("ocnumber avaible")
         res.json({ order });
     } catch (error) {
         console.log(error);
